@@ -5,3 +5,4 @@ resource "aws_subnet" "main" {
   
   tags = var.tags
 }
+
