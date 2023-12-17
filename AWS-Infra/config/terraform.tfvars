@@ -223,3 +223,65 @@ route_table_association_config = {
 
 
 }
+
+eks_cluster_config = {
+
+    "EKS01" = {
+
+        eks_cluster_name = "demo_cluster"
+
+        public_01 = "public-us-east-1a"
+        public_02 = "public-us-east-1b"
+        private_01 = "private-us-east-1a"
+        private_02 = "private-us-east-1b"
+
+        tags = {
+
+            "Name" = "demo_cluster"
+        }
+
+        eks_role_name = "eks_role02"
+
+    }
+}
+
+eks_nodegroup_config = {
+
+    "node01" = {
+
+        eks_cluster = "EKS01"
+
+        eks_nodegroup_name = "demo_nodegroup01"
+
+        private_01 = "private-us-east-1a"
+        private_02 = "private-us-east-1b"    
+
+        nodegroup_instancetypes = ["t3.medium"]
+
+        nodegroup_role_name = "nodegroup_role02"
+
+        tags = {
+
+            "Name" = "nodegroup_demo"
+        }      
+        }
+
+    "node02" = {
+
+        eks_cluster = "EKS01"
+
+        eks_nodegroup_name = "demo_nodegroup02"
+
+        private_01 = "private-us-east-1a"
+        private_02 = "private-us-east-1b"    
+
+        nodegroup_instancetypes = ["t3.medium"]
+
+        nodegroup_role_name = "nodegroup_role03"
+
+        tags = {
+
+            "Name" = "nodegroup_demo"
+        }      
+        }
+}
