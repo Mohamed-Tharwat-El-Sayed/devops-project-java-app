@@ -55,13 +55,14 @@ pipeline {
             }
         }
 
-        stage('Sonarqube Analysis'){
+        stage('SonarQube Analysis'){
 
             steps {
                 withSonarQubeEnv('sonarqube-project') {
-                sh "mvn clean package sonar:sonar \
+                sh "mvn  clean package sonar:sonar \
                     -Dsonar.projectKey=springboot \
-                    -Dsonar.host.url=http://localhost:9000"
+                    -Dsonar.host.url=http://localhost:9000 \
+                    -Dsonar.login=7cba7d9f3f760ba9733fd3ed8110124b75b9674c"
             }
             }
         }
