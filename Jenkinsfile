@@ -55,10 +55,10 @@ pipeline {
             }
         }
 
-        stage('Sonarqube analysis'){
+        stage('Sonarqube Analysis'){
 
             steps {
-                withSonarQubeEnv(credentialsId: 'sonarqube-project-credential') {
+                withSonarQubeEnv('sonarqube-project') {
                 sh "mvn clean packege sonar:sonar \
                     -Dsonar.projectKey=maven-sonarqube \
                     -Dsonar.host.url=http://localhost:9000"
