@@ -59,10 +59,9 @@ pipeline {
 
             steps {
                 withSonarQubeEnv('sonarqube-project') {
-                sh "mvn  clean package sonar:sonar \
+                sh "mvn  clean package sonar:root \
                     -Dsonar.projectKey=springboot \
-                    -Dsonar.host.url=http://localhost:9000 \
-                    -Dsonar.login=7cba7d9f3f760ba9733fd3ed8110124b75b9674c"
+                    -Dsonar.host.url=http://localhost:9000"
             }
             }
         }
