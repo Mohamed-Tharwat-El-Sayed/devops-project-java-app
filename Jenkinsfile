@@ -59,7 +59,7 @@ pipeline {
 
             steps {
                 withSonarQubeEnv('sonarqube-project') {
-                sh "mvn clean packege sonar:sonar \
+                sh "mvn clean package sonar:sonar \
                     -Dsonar.projectKey=maven-sonarqube \
                     -Dsonar.host.url=http://localhost:9000"
             }
