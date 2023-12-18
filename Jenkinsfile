@@ -17,7 +17,7 @@ pipeline {
             }
         }
 
-        stage('Build Artifacct'){
+        stage('Build Artifact'){
 
             steps {
 
