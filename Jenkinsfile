@@ -4,7 +4,7 @@ pipeline {
 
     tools {
 
-        maven "maven 3.9.6"
+        maven "maven 3.9.6" 
     }
 
     stages {
@@ -33,11 +33,19 @@ pipeline {
                 sh "mvn test"
             }
             post {
-                always{
+                always {
                     junit 'target/surefire-reports/*.xml'
+            }
+            }
+        }
+
+        stage('Integeration Testing'){
+
+            steps {
+
+                sh "mvn verify -DskipUnitTests"
             }
         }
     }
-}
 }
 
