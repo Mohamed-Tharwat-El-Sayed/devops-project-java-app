@@ -55,7 +55,7 @@ pipeline {
             }
         }
 
-        stage('Sonarqube Analysis'){
+        stage('Sonarqube analysis'){
 
             steps {
                 withSonarQubeEnv(credentialsId: 'sonarqube-project-credential') {
