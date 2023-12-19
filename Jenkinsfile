@@ -63,6 +63,14 @@ pipeline {
             }
             }
         }
+
+        stage('Quality Gate Condition'){
+
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }
+
     }
 }
 
