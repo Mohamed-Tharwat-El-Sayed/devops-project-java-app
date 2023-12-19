@@ -75,26 +75,39 @@ pipeline {
             steps {
 
                 script {
-                    def readPomVersion =  readMavenPom file: 'pom.xml'
+                    def readFile =  readMavenPom file: 'pom.xml'
 
-                    def nexusRepo = readPomVersion.version.endsWith('SNAPSHOT') ? "java-app-snapshot" : "java-app-release"
+                    def nexusRepo = readFile.version.endsWith('SNAPSHOT') ? "java-app-snapshot" : "java-app-release"
 
                     nexusArtifactUploader artifacts: 
                     [
                         [
-                            artifactId: "${readPomVersion.artifactId}", 
+                            artifactId: "${readFile.artifactId}", 
                             classifier: '', 
                             file: 'target/Uber.jar', 
                             type: 'jar'
                         ]
                     ], 
                     credentialsId: 'nexus-credential', 
-                    groupId: "${readPomVersion.groupId}", 
+                    groupId: "${readFile.groupId}", 
                     nexusUrl: '192.168.0.101:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: nexusRepo, 
-                    version: "${readPomVersion.version}"
+                    version: "${readFile.version}"
+                }
+            }
+        }
+        stage('Docker Image Build'){
+
+            steps {
+
+                script {
+
+                    sh 'docker image build -it $JOB_NAME:v1.$BUILD_NUMBER .'
+                    sh 'docker image tag $JOB_NAME:v1.$BUILD_NUMBER tharwat3551/$JOB_NAME:v1.$BUILD_NUMBER'
+                    sh 'docker image tag $JOB_NAME:v1.$BUILD_NUMBER tharwat3551/$JOB_NAME:Latest'
+
                 }
             }
         }
