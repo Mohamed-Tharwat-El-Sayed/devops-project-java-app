@@ -82,18 +82,18 @@ pipeline {
                     nexusArtifactUploader artifacts: 
                     [
                         [
-                            artifactId: 'springboot', 
+                            artifactId: ${readPomVersion.artifactId}, 
                             classifier: '', 
                             file: 'target/Uber.jar', 
                             type: 'jar'
                         ]
                     ], 
                     credentialsId: 'nexus-credential', 
-                    groupId: 'com.example', 
+                    groupId: ${readPomVersion.groupId}, 
                     nexusUrl: '192.168.0.101:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
-                    repository: 'java-app-release', 
+                    repository: nexusRepo, 
                     version: "${readPomVersion.version}"
                 }
             }
