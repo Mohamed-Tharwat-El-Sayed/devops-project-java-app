@@ -82,14 +82,14 @@ pipeline {
                     nexusArtifactUploader artifacts: 
                     [
                         [
-                            artifactId: ${readPomVersion.artifactId}, 
+                            artifactId: "${readPomVersion.artifactId}", 
                             classifier: '', 
                             file: 'target/Uber.jar', 
                             type: 'jar'
                         ]
                     ], 
                     credentialsId: 'nexus-credential', 
-                    groupId: ${readPomVersion.groupId}, 
+                    groupId: "${readPomVersion.groupId}", 
                     nexusUrl: '192.168.0.101:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
