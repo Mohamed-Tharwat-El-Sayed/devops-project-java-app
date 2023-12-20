@@ -68,6 +68,7 @@ pipeline {
 
             steps {
                 waitForQualityGate abortPipeline: true
+                }
                 post{
                     always {
                         echo 'Slack Notifications'
@@ -77,7 +78,7 @@ pipeline {
                         }
                     }
                 }
-            }
+
         stage('Upload war files to Nexus'){
 
             steps {
