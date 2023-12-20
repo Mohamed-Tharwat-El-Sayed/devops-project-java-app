@@ -104,7 +104,7 @@ pipeline {
 
                 script {
 
-                    sh 'docker image build -it $JOB_NAME:v1.$BUILD_NUMBER .'
+                    sh 'docker image build -t $JOB_NAME:v1.$BUILD_NUMBER .'
                     sh 'docker image tag $JOB_NAME:v1.$BUILD_NUMBER tharwat3551/$JOB_NAME:v1.$BUILD_NUMBER'
                     sh 'docker image tag $JOB_NAME:v1.$BUILD_NUMBER tharwat3551/$JOB_NAME:Latest'
 
