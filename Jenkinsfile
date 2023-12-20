@@ -90,7 +90,7 @@ pipeline {
                     ], 
                     credentialsId: 'nexus-credential', 
                     groupId: "${readFile.groupId}", 
-                    nexusUrl: '192.168.0.101:8081', 
+                    nexusUrl: '192.168.0.106:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: nexusRepo, 
