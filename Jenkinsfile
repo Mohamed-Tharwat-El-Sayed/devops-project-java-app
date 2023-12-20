@@ -47,13 +47,6 @@ pipeline {
             }
         }
 
-        stage('Maven Build'){
-
-            steps {
-                
-                sh "mvn clean install"
-            }
-        }
 
         stage('SonarQube Analysis'){
 
@@ -77,6 +70,14 @@ pipeline {
                         }
                     }
                 }
+
+        stage('Maven Build'){
+
+            steps {
+                
+                sh "mvn clean install"
+            }
+        }
 
         stage('Upload war files to Nexus'){
 
