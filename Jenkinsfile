@@ -119,7 +119,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'dockerhub_pass', usernameVariable: 'dockerhub_user')]) {
                         sh 'docker login -u ${dockerhub_user} -p ${dockerhub_pass}'
                         sh 'docker image push ${dockerhub_user}/$JOB_NAME:v1.$BUILD_NUMBER'
-                        sh 'docker image push ${dockerhub_user}/latest'
+                        sh 'docker image push ${dockerhub_user}/$JOB_NAME:latest'
                     }
                     
                 }
