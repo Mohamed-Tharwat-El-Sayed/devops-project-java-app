@@ -1,6 +1,10 @@
 variable "region" {}
-variable "access_key"{}
-variable "secret_key"{}
+variable "access_key"{
+default = ""
+}
+variable "secret_key"{
+default = ""
+}
 variable "vpc_config" {}
 variable "security_group_config" {}
 variable "subnet_config" {}
