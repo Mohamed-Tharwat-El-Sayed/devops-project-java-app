@@ -174,14 +174,11 @@ pipeline {
         }
         stage('Destroy InFra'){
 
-            when {  not {
+            when {
                 expression {
-                    ${params.Infra} == 'Create'
+                    ${params.Infra} == 'Destroy'
                 }
-                expression {
-                    ${params.Infra} == 'NO-Effect'
-                }
-            }
+
             }
             steps {
 
