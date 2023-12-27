@@ -246,7 +246,7 @@ eks_cluster_config = {
 
     "EKS01" = {
 
-        eks_cluster_name = "demo_cluster"
+        eks_cluster_name = ""
 
         public_01 = "public-us-east-1a"
         public_02 = "public-us-east-1b"
