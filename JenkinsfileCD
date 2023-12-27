@@ -16,8 +16,8 @@ pipeline {
 
         access_key = credentials('aws_access_key')
         secret_key = credentials('aws_secret_key')
-        service_name = 'spring_boot_java_app_service'
-        deployment_name = 'spring_boot_java_app_deployment'
+        service_name = 'spring-boot-java-app-service'
+        deployment_name = 'spring-boot-java-app-deployment'
     }
     
     stages {
