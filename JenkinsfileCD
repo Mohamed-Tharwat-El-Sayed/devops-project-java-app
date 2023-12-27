@@ -34,10 +34,10 @@ pipeline {
 
             when { allOf {
                 expression {
-                    ${params.Infra} == 'Create'
+                    params.Infra == 'Create'
                 }
                 expression {
-                    ${params.Action} == 'Create'
+                    params.Action == 'Create'
                 }
             }
             }
@@ -62,16 +62,16 @@ pipeline {
 
             when { anyOf {
                 expression {
-                    ${params.Infra} == 'Create'
+                    params.Infra == 'Create'
                 }
                 expression {
-                    ${params.Action} == 'Create'
+                    params.Action == 'Create'
                 }
                 expression {
-                    ${params.Action} == 'Delete'
+                    params.Action == 'Delete'
                 }
                 expression {
-                    ${params.Infra} == 'NO-Effect'
+                    params.Infra == 'NO-Effect'
                 }
             }
             }
@@ -94,10 +94,10 @@ pipeline {
 
             when { allOf {
                 expression {
-                    ${params.Infra} == 'Create'
+                    params.Infra == 'Create'
                 }
                 expression {
-                    ${params.Action} == 'Create'
+                    params.Action == 'Create'
                 }
             }
             }
@@ -133,10 +133,10 @@ pipeline {
 
             when { anyOf {
                 expression {
-                    ${params.Infra} == 'NO-Effect'
+                    params.Infra == 'NO-Effect'
                 }
                 expression {
-                    ${params.Action} == 'Delete'
+                    params.Action == 'Delete'
                 }
             }
             }
@@ -176,7 +176,7 @@ pipeline {
 
             when {
                 expression {
-                    ${params.Infra} == 'Destroy'
+                    params.Infra == 'Destroy'
                 }
 
             }
