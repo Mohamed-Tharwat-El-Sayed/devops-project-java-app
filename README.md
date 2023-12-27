@@ -149,8 +149,7 @@ opened by user: `admin`, password `admin` .
 
 3. Go to quality gates and create condition
 <p align="center">
-  <img src="./Project documentation/qulity-gate.png
-  " width="600" title="Node_IAM" alt="Node_IAM">
+  <img src="./Project documentation/qulity-gate.png" width="600" title="Node_IAM" alt="Node_IAM">
   </p>
 
 #### 3. Sonatype Nexus
@@ -162,32 +161,27 @@ opened by user: `admin`, password `admin` .
 1. In jenkins 
 - you see demo-app-java-CI
 <p align="center">
-  <img src="./Project documentation/ci-pipeline.png
-  " width="600" title="Node_IAM" alt="Node_IAM">
+  <img src="./Project documentation/ci-pipeline.png" width="600" title="Node_IAM" alt="Node_IAM">
   </p>
 -  you see demo-app-java-CD parameters
 <p align="center">
-  <img src="./Project documentation/parameters.png
-  " width="600" title="Node_IAM" alt="Node_IAM">
+  <img src="./Project documentation/parameters.png" width="600" title="Node_IAM" alt="Node_IAM">
   </p>
 -  you see demo-app-java-CD
 <p align="center">
-  <img src="./Project documentation/cd-pipeline.png
-  " width="600" title="Node_IAM" alt="Node_IAM">
+  <img src="./Project documentation/cd-pipeline.png" width="600" title="Node_IAM" alt="Node_IAM">
   </p>
 
 2. In nexus 
 - you can see war files in two repo 
 <p align="center">
-  <img src="./Project documentation/war-files.png
-  " width="600" title="Node_IAM" alt="Node_IAM">
+  <img src="./Project documentation/war-files.png" width="600" title="Node_IAM" alt="Node_IAM">
   </p>
   
 3. In sonarqube 
 - you can see status of the project
 <p align="center">
-  <img src="./Project documentation/Project-status.png
-  " width="600" title="Node_IAM" alt="Node_IAM">
+  <img src="./Project documentation/Project-status.png" width="600" title="Node_IAM" alt="Node_IAM">
   </p>
 
 4. On browser
@@ -197,8 +191,7 @@ opened by user: `admin`, password `admin` .
   docker get all 
   ```
 -  <p align="center">
-  <img src="./Project documentation/on-browser.png
-  " width="600" title="Node_IAM" alt="Node_IAM">
+  <img src="./Project documentation/on-browser.png" width="600" title="Node_IAM" alt="Node_IAM">
   </p>
 
 ## Contact
