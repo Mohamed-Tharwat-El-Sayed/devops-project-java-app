@@ -17,7 +17,7 @@ pipeline {
         access_key = credentials('aws_access_key')
         secret_key = credentials('aws_secret_key')
         service_name = 'spring-boot-java-app-service'
-        deployment_name = 'spring-sboot-java-app-deployment'
+        deployment_name = 'spring-boot-java-app-deployment'
     }
     
     stages {
@@ -184,7 +184,7 @@ pipeline {
 
                         if(delete){
                         sh """
-                        kubectl delete deployments.apps/${deployment_name}
+                       kubectl delete deployment ${deployment_name}
                         
                         """
                         }
