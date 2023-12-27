@@ -8,6 +8,17 @@ module "aws_vpc" {
         tags = each.value.tags
 }
 
+module "aws_security_group" {
+    source = "./modules/aws_security_group"
+
+    for_each = var.security_group_config
+
+        name = each.value.name
+
+        vpc_id = module.aws_vpc[each.value.vpc_name].vpc_id
+
+        tags = each.value.tags
+}
 module "aws_subnets" {
     source = "./modules/aws_subnets"
 
@@ -109,4 +120,5 @@ module "aws_eks_nodegroup" {
 
     tags = each.value.tags
 }
+
 

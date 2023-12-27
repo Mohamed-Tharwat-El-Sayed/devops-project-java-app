@@ -1,5 +1,8 @@
 variable "region" {}
+variable "access_key"{}
+variable "secret_key"{}
 variable "vpc_config" {}
+variable "security_group_config" {}
 variable "subnet_config" {}
 variable "internetGW_config" {}
 variable "elastic_iP_config" {}

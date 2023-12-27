@@ -1,6 +1,9 @@
 
 region = "us-east-1"
 
+access_key = ""
+secret_key = ""
+
 vpc_config = {
     "vpc01" ={
 
@@ -10,6 +13,21 @@ vpc_config = {
 
             "Name" = "first_vpc"
 
+        }
+    }
+}
+
+security_group_config = {
+
+    "SG01" = {
+
+        name = "mypublicSG"
+
+        vpc_name = "vpc01"
+
+        tags = {
+
+            "Name" = "mypublicSGs"
         }
     }
 }
