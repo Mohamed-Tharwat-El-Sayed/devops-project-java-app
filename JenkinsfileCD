@@ -17,7 +17,7 @@ pipeline {
         access_key = credentials('aws_access_key')
         secret_key = credentials('aws_secret_key')
         service_name = 'spring-boot-java-app-service'
-        deployment_name = 'spring-boot-java-app-deployment'
+        deployment_name = 'spring-sboot-java-app-deployment'
     }
     
     stages {
@@ -49,7 +49,7 @@ pipeline {
 
                         sh """
                         terraform init 
-                        terraform plan -var 'access_key=$access_key' -var 'secret_key=$secret_key' -var 'region=${params.Region}'   --var-file=./config/terraform.tfvars
+                        terraform plan -var 'access_key=$access_kye' -var 'secret_key=$secret_key' -var 'region=${params.Region}' --var-file=./config/terraform.tfvars
                         terraform apply -var 'access_key=$access_key' -var 'secret_key=$secret_key' -var 'region=${params.Region}'  --var-file=./config/terraform.tfvars --auto-approve
                         """
                     }
@@ -90,6 +90,28 @@ pipeline {
             }
         }
 
+        stage('Destroy InFra'){
+
+            when {
+                expression {
+                    params.Infra == 'Destroy'
+                }
+
+            }
+            steps {
+
+                script {
+
+                    dir('AWS-Infra') {
+
+                        sh """
+                        terraform destroy -var 'access_key=${access_key}' -var 'secret_key=${secret_key}' -var 'region=${params.Region}' -var 'eks_cluster_name=${params.Cluster}' --var-file=./config/terraform.tfvars --auto-approve
+                        """
+                    }
+
+                }
+            }
+        }
         stage('Create Deployment on EKS cluster'){
 
             when { allOf {
@@ -131,7 +153,7 @@ pipeline {
         }
         stage('Delete deployment on EKS cluster '){
 
-            when { anyOf {
+            when { allOf {
                 expression {
                     params.Infra == 'NO-Effect'
                 }
@@ -159,36 +181,14 @@ pipeline {
 
                         }
 
-                        if(destroy){
 
+                        if(destroy){
                         sh """
                         kubectl delete service ${service_name}
                         kubectl delete deployment ${deployment_name}
                         
                         """
                         }
-                    }
-
-                }
-            }
-        }
-        stage('Destroy InFra'){
-
-            when {
-                expression {
-                    params.Infra == 'Destroy'
-                }
-
-            }
-            steps {
-
-                script {
-
-                    dir('AWS-Infra') {
-
-                        sh """
-                        terraform destroy -var 'access_key=${access_key}' -var 'secret_key=${secret_key}' -var 'region=${params.Region}'  --var-file=./config/terraform.tfvars --auto-approve
-                        """
                     }
 
                 }
