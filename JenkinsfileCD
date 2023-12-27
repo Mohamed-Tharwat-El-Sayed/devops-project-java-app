@@ -185,7 +185,7 @@ pipeline {
                         if(delete){
                         sh """
                         kubectl delete service ${service_name}
-                        kubectl delete deployment ${deployment_name}
+                        kubectl delete deployment.apps/${deployment_name}
                         
                         """
                         }
