@@ -110,15 +110,15 @@ opened by user: `admin`, password `admin` .
 4. **Manage System:**
    - In manage Jenkins --> system
 
-   <p align="center">
-  <img src="./Project documentation/sonarqube-server.png" width="600" title="ekscluster_role" alt="ekscluster_role">
-  </p>
+     <p align="center">
+     <img src="./Project documentation/sonarqube-server.png" width="600" title="ekscluster_role" alt="ekscluster_role">
+      </p>
   
   **Note:**  you should not use localhost like (http://localhost:9000)
    to solve that put in terminal `ifconfig`
- <p align="center">
-  <img src="./Project documentation/ifconfig.png" width="600" title="ekscluster_role" alt="ekscluster_role">
-  </p>
+   <p align="center">
+    <img src="./Project documentation/ifconfig.png" width="600" title="ekscluster_role" alt="ekscluster_role">
+    </p>
 
   -  In manage Jenkins --> system 
   <p align="center">
@@ -190,9 +190,9 @@ opened by user: `admin`, password `admin` .
   sudo docker exec -it  <CONTAINER_ID> bash
   docker get all 
   ```
--  <p align="center">
-  <img src="./Project documentation/on-browser.png" width="600" title="Node_IAM" alt="Node_IAM">
-  </p>
+     <p align="center">
+     <img src="./Project documentation/on-browser.png" width="600" title="Node_IAM" alt="Node_IAM">
+     </p>
 
 ## Contact
 
