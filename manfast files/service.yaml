@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: spring_boot_java_app_service
+  name: spring-boot-java-app-service
   labels:
-    app: java_app
+    app: java-app
 spec:
   selector:
-    app: java_app
+    app: java-app
   type: LoadBalancer
   ports:
   - port: 80 
