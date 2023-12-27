@@ -1,6 +1,24 @@
+
 pipeline {
 
     agent any 
+
+    parameters {
+
+        choise(name: 'Infra', choices: ['Create', 'Destroy', 'NO-Effect'], description: 'choose create or destroy Infra(cluster)')
+        string(name: 'Region', description: 'Write the Region',defaultValue: 'us-east-1')
+        string(name: 'Cluster', description: 'write the cluser name', defaultValue: 'demo_cluster')
+        choise(name: 'Action', choices: ['Create', 'Delete'], description: 'choose Create or delete deployment')
+
+    }
+
+    enviroment {
+
+        access_key = credentials('aws_access_key')
+        secret_key = credentials('aws_secret_key')
+        service_name = 'spring_boot_java_app_service'
+        deployment_name = 'spring_boot_java_app_deployment'
+    }
     
     stages {
 
@@ -9,6 +27,174 @@ pipeline {
             steps {
 
                 git branch: 'main', credentialsId: 'github-credential', url: 'https://github.com/Mohamed-Tharwat-El-Sayed/devops-project-java-app.git'
+            }
+        }
+
+        stege('Create InFra'){
+
+            when { allOf {
+                expression {
+                    ${params.Infra} == 'Create'
+                }
+                expression {
+                    ${params.Action} == 'Create'
+                }
+            }
+            }
+            steps {
+
+                script {
+
+                    dir('AWS-Infra') {
+
+                        sh """
+                        terraform init 
+                        terraform plan -var 'access_key=$access_key' -var 'secret_key=$secret_key' -var 'region=${params.Region}' -var 'eks_cluster_name=${params.Cluster}' --var-file=./config/terraform.tfvars
+                        terraform apply -var 'access_key=$access_key' -var 'secret_key=$secret_key' -var 'region=${params.Region}' -var 'eks_cluster_name=${params.Cluster}' --var-file=./config/terraform.tfvars --auto-approve
+                        """
+                    }
+
+                }
+            }
+        }
+
+        stage('Connect to EKS'){
+
+            when { anyOf {
+                expression {
+                    ${params.Infra} == 'Create'
+                }
+                expression {
+                    ${params.Action} == 'Create'
+                }
+                expression {
+                    ${params.Action} == 'Delete'
+                }
+                expression {
+                    ${params.Infra} == 'NO-Effect'
+                }
+            }
+            }
+
+            steps {
+
+                script {
+
+                    sh """
+                    aws configure set  region ${params.Region}
+                    aws configure set aws_access_key_id ${access_key}
+                    aws configure set aws_secret_access_key ${secret_key}
+                    aws eks --region ${params.Region} update-kubeconfig --name ${params.Cluster}
+                    """
+                }
+            }
+        }
+
+        stage('Create Deployment on EKS cluster'){
+
+            when { allOf {
+                expression {
+                    ${params.Infra} == 'Create'
+                }
+                expression {
+                    ${params.Action} == 'Create'
+                }
+            }
+            }
+
+            steps {
+
+                script {
+
+                    dir('manfast files'){
+
+                        def apply = false
+
+                        try{
+                            input message: 'please confirm to deploy on eks', ok: 'Ready to apply ?'
+                            apply = true
+
+                        }catch(err){
+                            apply = false
+                            currentBuild.result = 'UNSTABLE'
+
+                        }
+
+                        if(apply){
+
+                        sh 'kubectl apply -f .'
+                    }
+                    }
+
+                }
+            }
+        }
+        stage('Delete deployment on EKS cluster '){
+
+            when { anyOf {
+                expression {
+                    ${params.Infra} == 'NO-Effect'
+                }
+                expression {
+                    ${params.Action} == 'Delete'
+                }
+            }
+            }
+
+            steps {
+
+                script {
+
+                    dir('manfast files'){
+
+                        def delete = false
+
+                        try{
+                            input message: 'please confirm to delete on eks', ok: 'Ready to delete ?'
+                            delete = true
+
+                        }catch(err){
+                            delete = false
+                            currentBuild.result = 'UNSTABLE'
+
+                        }
+
+                        if(destroy){
+
+                        sh """
+                        kubectl delete service ${service_name}
+                        kubectl delete deployment ${deployment_name}
+                        
+                        """
+                        }
+                    }
+
+                }
+            }
+        }
+        stege('Destroy InFra'){
+
+            when {  not {
+                expression {
+                    ${params.Infra} == 'Create'
+                }
+                expression {
+                    ${params.Infra} == 'NO-Effect'
+                }
+            }
+            }
+            steps {
+
+                script {
+
+                    dir('AWS-Infra') {
+
+                        sh """
+                        terraform destroy -var 'access_key=${access_key}' -var 'secret_key=${secret_key}' -var 'region=${params.Region}' -var 'eks_cluster_name=${params.Cluster}' --var-file=./config/terraform.tfvars --auto-approve
+                        """
+                    }
+
+                }
             }
         }
     }
