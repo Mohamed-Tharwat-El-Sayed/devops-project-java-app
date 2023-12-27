@@ -182,7 +182,7 @@ pipeline {
                         }
 
 
-                        if(destroy){
+                        if(delete){
                         sh """
                         kubectl delete service ${service_name}
                         kubectl delete deployment ${deployment_name}
