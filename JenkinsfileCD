@@ -5,14 +5,14 @@ pipeline {
 
     parameters {
 
-        choise(name: 'Infra', choices: ['Create', 'Destroy', 'NO-Effect'], description: 'choose create or destroy Infra(cluster)')
+        choice(name: 'Infra', choices: ['Create', 'Destroy', 'NO-Effect'], description: 'choose create or destroy Infra(cluster)')
         string(name: 'Region', description: 'Write the Region',defaultValue: 'us-east-1')
         string(name: 'Cluster', description: 'write the cluser name', defaultValue: 'demo_cluster')
-        choise(name: 'Action', choices: ['Create', 'Delete'], description: 'choose Create or delete deployment')
+        choice(name: 'Action', choices: ['Create', 'Delete'], description: 'choose Create or delete deployment')
 
     }
 
-    enviroment {
+    environment {
 
         access_key = credentials('aws_access_key')
         secret_key = credentials('aws_secret_key')
@@ -30,7 +30,7 @@ pipeline {
             }
         }
 
-        stege('Create InFra'){
+        stage('Create InFra'){
 
             when { allOf {
                 expression {
@@ -172,7 +172,7 @@ pipeline {
                 }
             }
         }
-        stege('Destroy InFra'){
+        stage('Destroy InFra'){
 
             when {  not {
                 expression {
