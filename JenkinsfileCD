@@ -105,7 +105,7 @@ pipeline {
                     dir('AWS-Infra') {
 
                         sh """
-                        terraform destroy -var 'access_key=${access_key}' -var 'secret_key=${secret_key}' -var 'region=${params.Region}' -var 'eks_cluster_name=${params.Cluster}' --var-file=./config/terraform.tfvars --auto-approve
+                        terraform destroy -var 'access_key=${access_key}' -var 'secret_key=${secret_key}' -var 'region=${params.Region}'  --var-file=./config/terraform.tfvars --auto-approve
                         """
                     }
 
